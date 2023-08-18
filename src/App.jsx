@@ -1,6 +1,6 @@
 import "./App.css";
 import { Component } from "react";
-import FormularioCadastro from "./components/FormularioCadastro";
+import FormularioCadastro from "./components/FormularioCadastro/FormularioCadastro";
 import { Container, Typography } from "@mui/material";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
