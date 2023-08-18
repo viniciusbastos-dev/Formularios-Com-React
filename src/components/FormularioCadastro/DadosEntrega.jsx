@@ -1,9 +1,14 @@
 import { Button, TextField } from "@mui/material";
-import React from "react";
+import { PropTypes } from "prop-types";
 
-function DadosEntrega() {
+function DadosEntrega({ aoEnviar }) {
     return (
-        <form>
+        <form
+            onSubmit={(event) => {
+                event.preventDefault();
+                aoEnviar();
+            }}
+        >
             <TextField
                 id="cep"
                 label="CEP"
@@ -46,5 +51,8 @@ function DadosEntrega() {
         </form>
     );
 }
+DadosEntrega.propTypes = {
+    aoEnviar: PropTypes.func,
+};
 
 export default DadosEntrega;

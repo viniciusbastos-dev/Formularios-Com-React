@@ -10,7 +10,7 @@ function DadosUsuario({ aoEnviar }) {
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                aoEnviar({ email, senha });
+                aoEnviar();
             }}
         >
             <TextField
