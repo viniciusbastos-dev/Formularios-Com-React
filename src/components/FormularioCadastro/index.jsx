@@ -1,7 +1,13 @@
 import { Button, FormControlLabel, Switch, TextField } from "@mui/material";
+import { PropTypes } from "prop-types";
 import { useState } from "react";
 
 export default function FormularioCadastro({ aoEnviar, validarCPF }) {
+    FormularioCadastro.propTypes = {
+        aoEnviar: PropTypes.func,
+        validarCPF: PropTypes.func,
+    };
+
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
