@@ -1,5 +1,4 @@
 import { Button, FormControlLabel, Switch, TextField } from "@mui/material";
-import { PropTypes } from "prop-types";
 import { useState } from "react";
 
 function DadosPessoais({ aoEnviar, validarCPF }) {
@@ -90,10 +89,5 @@ function DadosPessoais({ aoEnviar, validarCPF }) {
         </form>
     );
 }
-
-DadosPessoais.propTypes = {
-    aoEnviar: PropTypes.func,
-    validarCPF: PropTypes.func,
-};
 
 export default DadosPessoais;

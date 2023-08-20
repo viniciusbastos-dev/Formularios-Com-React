@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { PropTypes } from "prop-types";
 
 function DadosUsuario({ aoEnviar }) {
     const [email, setEmail] = useState("");
@@ -10,7 +9,7 @@ function DadosUsuario({ aoEnviar }) {
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                aoEnviar();
+                aoEnviar({ email, senha });
             }}
         >
             <TextField
@@ -45,9 +44,5 @@ function DadosUsuario({ aoEnviar }) {
         </form>
     );
 }
-
-DadosUsuario.propTypes = {
-    aoEnviar: PropTypes.func,
-};
 
 export default DadosUsuario;

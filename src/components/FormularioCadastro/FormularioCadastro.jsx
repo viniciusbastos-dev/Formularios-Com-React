@@ -1,21 +1,30 @@
-import { PropTypes } from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DadosPessoais from "./DadosPessoais";
 import DadosUsuario from "./DadosUsuario";
 import DadosEntrega from "./DadosEntrega";
 
 function FormularioCadastro({ aoEnviar, validarCPF }) {
     const [etapaAtual, setEtapaAtual] = useState(0);
+    const [dadosColetados, setDados] = useState({});
 
     const formularios = [
-        <DadosUsuario key="0" aoEnviar={passarEtapa} />,
+        <DadosUsuario key="0" aoEnviar={coletarDados} />,
         <DadosPessoais
             key="1"
-            aoEnviar={passarEtapa}
+            aoEnviar={coletarDados}
             validarCPF={validarCPF}
         />,
-        <DadosEntrega key="2" aoEnviar={aoEnviar} />,
+        <DadosEntrega key="2" aoEnviar={coletarDados} />,
     ];
+
+    useEffect(() => {
+        console.log(dadosColetados);
+    }, [dadosColetados]);
+
+    function coletarDados(dados) {
+        setDados({ ...dadosColetados, ...dados });
+        passarEtapa();
+    }
 
     function passarEtapa() {
         setEtapaAtual(etapaAtual + 1);
@@ -23,10 +32,5 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
 
     return <>{formularios[etapaAtual]}</>;
 }
-
-FormularioCadastro.propTypes = {
-    aoEnviar: PropTypes.func,
-    validarCPF: PropTypes.func,
-};
 
 export default FormularioCadastro;
