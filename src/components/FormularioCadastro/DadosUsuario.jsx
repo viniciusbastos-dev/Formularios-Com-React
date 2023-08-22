@@ -1,20 +1,41 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 
-function DadosUsuario({ aoEnviar }) {
+function DadosUsuario({ aoEnviar, validacoes }) {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+
+    const [erros, setErros] = useState({ senha: { valido: true, texto: "" } });
+
+    function validarCampos(event) {
+        const { name, value } = event.target;
+        const novoEstado = { ...erros };
+        novoEstado[name] = validacoes[name](value);
+        setErros(novoEstado);
+    }
+
+    function possoEnviar() {
+        for (let campo in erros) {
+            if (!erros[campo].valido) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                aoEnviar({ email, senha });
+                if (possoEnviar()) {
+                    aoEnviar({ email, senha });
+                }
             }}
         >
             <TextField
                 value={email}
                 id="email"
+                name="email"
                 label="Email"
                 type="email"
                 variant="filled"
@@ -28,6 +49,7 @@ function DadosUsuario({ aoEnviar }) {
             <TextField
                 value={senha}
                 id="senha"
+                name="senha"
                 label="Senha"
                 type="password"
                 variant="filled"
@@ -37,9 +59,12 @@ function DadosUsuario({ aoEnviar }) {
                 onChange={(event) => {
                     setSenha(event.target.value);
                 }}
+                onBlur={validarCampos}
+                error={!erros.senha.valido}
+                helperText={erros.senha.texto}
             />
             <Button type="submit" variant="contained" color="primary">
-                Cadastrar
+                Próximo
             </Button>
         </form>
     );
