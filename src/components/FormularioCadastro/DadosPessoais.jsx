@@ -1,7 +1,8 @@
 import { Button, FormControlLabel, Switch, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ValidacoesDeCadastro from "../../contexts/ValidacoesDeCadastro";
 
-function DadosPessoais({ aoEnviar, validacoes }) {
+function DadosPessoais({ aoEnviar }) {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
@@ -11,6 +12,8 @@ function DadosPessoais({ aoEnviar, validacoes }) {
         cpf: { valido: true, texto: "" },
         nome: { valido: true, texto: "" },
     });
+
+    const validacoes = useContext(ValidacoesDeCadastro);
 
     function validarCampos(event) {
         const { name, value } = event.target;

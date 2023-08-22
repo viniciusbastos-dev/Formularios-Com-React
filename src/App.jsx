@@ -8,6 +8,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import { validarCPF, validarSenha } from "./models/cadastro";
+import ValidacoesDeCadastro from "./contexts/ValidacoesDeCadastro";
 class App extends Component {
     render() {
         return (
@@ -15,14 +16,15 @@ class App extends Component {
                 <Typography variant="h3" align="center">
                     Formulário de cadastro
                 </Typography>
-                <FormularioCadastro
-                    validacoes={{
+                <ValidacoesDeCadastro.Provider
+                    value={{
                         cpf: validarCPF,
                         senha: validarSenha,
                         nome: validarSenha,
                     }}
-                    aoEnviar={aoEnviarFormulario}
-                />
+                >
+                    <FormularioCadastro aoEnviar={aoEnviarFormulario} />
+                </ValidacoesDeCadastro.Provider>
             </Container>
         );
     }
